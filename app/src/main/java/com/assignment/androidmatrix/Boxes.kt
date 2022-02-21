@@ -1,7 +1,7 @@
 package com.assignment.androidmatrix
 
 class Boxes {
-    val touchMatrix: Array<BooleanArray> = Array(4) { BooleanArray(4) }
+    var touchMatrix: Array<BooleanArray> = Array(4) { BooleanArray(4) }
     private var firstTouchedColumn = -1
     private var firstTouchedRow = -1
     private var currentTouchedColumn = -1

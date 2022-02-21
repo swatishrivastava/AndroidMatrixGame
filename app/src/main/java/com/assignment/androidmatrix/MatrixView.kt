@@ -19,12 +19,13 @@ class MatrixView @JvmOverloads constructor(
     private var cellWidth = 0
     private var cellHeight: Int = 0
     private val redPaint: Paint = Paint()
-    private val blackPaint: Paint = Paint()
-    private lateinit var cellChecked: Array<BooleanArray>
+    private val yellowPaint: Paint = Paint()
     private var boxes = Boxes()
 
     init {
         redPaint.color = Color.RED
+        yellowPaint.color = Color.YELLOW
+
     }
 
     private fun calculateDimensions() {
@@ -33,7 +34,7 @@ class MatrixView @JvmOverloads constructor(
         }
         cellWidth = width / numColumns
         cellHeight = height / numRows
-        cellChecked = Array(numColumns) { BooleanArray(numRows) }
+        boxes.touchMatrix = Array(numColumns) { BooleanArray(numRows) }
         invalidate()
     }
 
@@ -49,6 +50,8 @@ class MatrixView @JvmOverloads constructor(
         }
         val width = width
         val height = height
+
+
         for (i in 0 until numColumns) {
             for (j in 0 until numRows) {
                 if (boxes.touchMatrix[i][j]) {
@@ -60,16 +63,19 @@ class MatrixView @JvmOverloads constructor(
                 }
             }
         }
+
+
         for (i in 1 until numColumns) {
             canvas.drawLine(
                 (i * cellWidth).toFloat(), 0F, (i * cellWidth).toFloat(),
-                height.toFloat(), blackPaint
+                height.toFloat(), yellowPaint
             )
         }
+
         for (i in 1 until numRows) {
             canvas.drawLine(
                 0F, (i * cellHeight).toFloat(),
-                width.toFloat(), (i * cellHeight).toFloat(), blackPaint
+                width.toFloat(), (i * cellHeight).toFloat(), yellowPaint
             )
         }
     }
